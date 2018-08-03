@@ -1,7 +1,7 @@
 # Outputs
-src/**.js
+src/**/*.js
 src/**/*.js.map
-src/**.d.ts
+src/**/*.d.ts
 
 !src/generate/**.d.ts
 !src/generate/__files__/**.js

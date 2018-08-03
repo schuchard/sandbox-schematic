@@ -19,6 +19,6 @@
     "target": "es6",
     "types": ["node"]
   },
-  "include": ["config/**/*", "src/**/*"],
-  "exclude": ["src/__files__/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["src/generate/__files__/**/*"]
 }

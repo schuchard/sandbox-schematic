@@ -1,5 +1,5 @@
 {
-    "name": "schematic-collection-name",
+    "name": "@schuchard/schematic-generator",
     "version": "1.0.0",
     "main": "src/schematics/index.js",
     "schematics": "./src/collection.json",
@@ -9,7 +9,7 @@
       "clean": "rm -rf sandbox && mkdir sandbox",
       "clean:launch": "yarn clean && yarn launch",
       "clean:launch:all": "yarn build:schematic && yarn clean:launch",
-      "launch": "cd sandbox && ng g schematic-collection-name:schematic-name",
+      "launch": "cd sandbox && ng g @schuchard/schematic-generator:generate",
       "test:ci": "yarn clean:launch && yarn test:sandbox && yarn clean",
       "test:sandbox": "cd sandbox && yarn lint && yarn test && yarn e2e && yarn build",
       "link:schematic": "yarn link"
