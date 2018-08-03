@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchuchardSchematicGenerator",
+  "title": "Schematic Generator Options Schema",
+  "type": "object",
+  "properties": {},
+  "required": [],
+  "additionalProperties": false
+}

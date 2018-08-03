@@ -1,10 +1,10 @@
 # Outputs
-src/**/*.js
+src/**.js
 src/**/*.js.map
-src/**/*.d.ts
+src/**.d.ts
 
-!src/**/*/schema.d.ts
-!src/__files__/**/*.js
+!src/generate/**.d.ts
+!src/generate/__files__/**.js
 
 # IDEs
 .idea/

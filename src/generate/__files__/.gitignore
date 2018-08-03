@@ -1,9 +1,9 @@
 # Outputs
-src/**/*.js
+src/**.js
 src/**/*.js.map
-src/**/*.d.ts
+src/**.d.ts
 
-!src/**/*/schema.d.ts
+!src/**.d.ts
 !src/__files__/**/*.js
 
 # IDEs

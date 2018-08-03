@@ -4,16 +4,15 @@
     "main": "src/schematics/index.js",
     "schematics": "./src/collection.json",
     "scripts": {
-      "build:schematic": "tsc -p tsconfig.schematic.json",
-      "build:schematic:watch": "tsc -p tsconfig.schematic.json -watch",
-      "clean": "git checkout HEAD -- sandbox && git clean -fd sandbox",
+      "build:schematic": "tsc -p tsconfig.json",
+      "build:schematic:watch": "tsc -p tsconfig.json -watch",
+      "clean": "rm -rf sandbox && mkdir sandbox",
       "clean:launch": "yarn clean && yarn launch",
       "clean:launch:all": "yarn build:schematic && yarn clean:launch",
       "launch": "cd sandbox && ng g schematic-collection-name:schematic-name",
       "test:ci": "yarn clean:launch && yarn test:sandbox && yarn clean",
       "test:sandbox": "cd sandbox && yarn lint && yarn test && yarn e2e && yarn build",
-      "link:schematic": "yarn link && cd sandbox && yarn link schematic-collection-name",
-      "setup:once": "yarn && yarn link:schematic && yarn"
+      "link:schematic": "yarn link"
     },
     "dependencies": {
       "@angular-devkit/core": "^0.7.2",

@@ -16,8 +16,8 @@ export default function(options: ConfigOptions): Rule {
 }
 
 function logger(options: ConfigOptions): Rule {
-  return (host: Tree): Tree {
-    console.log('schematics');
+  return (host: Tree): Tree => {
+    console.log('schematics')
     return host;
   }
 }
