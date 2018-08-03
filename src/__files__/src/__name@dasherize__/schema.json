@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicCollectionName",
+  "title": "SchematicCollectionName Options Schema",
+  "type": "object",
+  "properties": {},
+  "required": [],
+  "additionalProperties": false
+}
