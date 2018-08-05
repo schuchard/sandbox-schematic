@@ -3,8 +3,8 @@
     "schematics": {
       "ng-add": {
         "description": "Add schematic",
-        "factory": "./schematic/index",
-        "schema": "./schematic/schema.json"
+        "factory": "./generate/index",
+        "schema": "./generate/schema.json"
       },
       "generate": {
         "description": "Add schematic",
