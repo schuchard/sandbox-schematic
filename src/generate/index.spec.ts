@@ -1,5 +1,6 @@
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 import { ConfigOptions } from '.';
+import { Tree } from '@angular-devkit/schematics/src/tree/interface';
 
 describe('Generate Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
@@ -31,7 +32,30 @@ describe('Generate Schematic', () => {
     });
   });
 
-  describe('name option', () => {});
+  describe('name option', () => {
+    let tree: UnitTestTree;
+    let pkgJson: any;
+
+    beforeEach(() => {
+      tree = schematicRunner.runSchematic('generate', defaultOptions);
+      pkgJson = getFileContent(tree, `/${path}/package.json`);
+    });
+
+    it('should set the package.json name', () => {
+      expect(pkgJson.json.name).toEqual('foo');
+    });
+
+    it('should set the main path', () => {
+      expect(pkgJson.json.main).toEqual(`src/${name}/index.js`);
+    });
+
+    it('should set the schematic name in the scripts', () => {
+      expect(pkgJson.json.scripts.launch).toEqual(`cd sandbox && ng g ${name}:schematic-name`);
+      expect(pkgJson.json.scripts['link:schematic']).toEqual(
+        `yarn link && cd sandbox && yarn link ${name}`
+      );
+    });
+  });
 
   describe('path option', () => {});
 
@@ -40,5 +64,20 @@ describe('Generate Schematic', () => {
       0,
       `\nExpected ${path} to exist`
     );
+  }
+
+  function getFileContent(tree: Tree, path: string) {
+    const fileEntry = tree.get(path);
+
+    if (!fileEntry) {
+      throw new Error(`The file (${path}) does not exist.`);
+    }
+
+    const content = fileEntry.content.toString();
+
+    return {
+      string: content,
+      json: JSON.parse(content),
+    };
   }
 });
