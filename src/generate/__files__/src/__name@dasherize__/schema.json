@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "SchematicCollectionName",
-  "title": "SchematicCollectionName Options Schema",
+  "id": "<%= classify(name) %>",
+  "title": "<%= classify(name) %> Options Schema",
   "type": "object",
   "properties": {},
   "required": [],

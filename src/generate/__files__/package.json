@@ -1,7 +1,7 @@
 {
-    "name": "schematic-collection-name",
+    "name": "<%= dasherize(name) %>",
     "version": "1.0.0",
-    "main": "src/schematics/index.js",
+    "main": "src/<%= dasherize(name) %>/index.js",
     "schematics": "./src/collection.json",
     "scripts": {
       "build:schematic": "tsc -p tsconfig.schematic.json",
@@ -9,10 +9,10 @@
       "clean": "git checkout HEAD -- sandbox && git clean -fd sandbox",
       "clean:launch": "yarn clean && yarn launch",
       "clean:launch:all": "yarn build:schematic && yarn clean:launch",
-      "launch": "cd sandbox && ng g schematic-collection-name:schematic-name",
+      "launch": "cd sandbox && ng g <%= dasherize(name) %>:schematic-name",
       "test:ci": "yarn clean:launch && yarn test:sandbox && yarn clean",
       "test:sandbox": "cd sandbox && yarn lint && yarn test && yarn e2e && yarn build",
-      "link:schematic": "yarn link && cd sandbox && yarn link schematic-collection-name",
+      "link:schematic": "yarn link && cd sandbox && yarn link <%= dasherize(name) %>",
       "setup:once": "yarn && yarn link:schematic && yarn"
     },
     "dependencies": {

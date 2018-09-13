@@ -3,7 +3,17 @@
   "id": "SchuchardSchematicGenerator",
   "title": "Schematic Generator Options Schema",
   "type": "object",
-  "properties": {},
-  "required": [],
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "Path to write the schematic to",
+      "default": "."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the schematic, example: ng add NAME"
+    }
+  },
+  "required": ["name"],
   "additionalProperties": false
 }
