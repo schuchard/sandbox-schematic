@@ -9,7 +9,7 @@
     "clean": "rm -rf sandbox && mkdir sandbox",
     "clean:launch": "yarn clean && yarn launch",
     "clean:launch:all": "yarn build:schematic && yarn clean:launch",
-    "launch": "schematics .:generate",
+    "launch": "schematics --dry-run=false .:generate ",
     "test:ci": "yarn clean:launch && yarn test:sandbox && yarn clean",
     "test:sandbox": "cd sandbox && yarn lint && yarn test && yarn e2e && yarn build",
     "link:schematic": "yarn link"

@@ -2,14 +2,14 @@
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "ng-add": {
-      "description": "Add schematic",
-      "factory": "./schematic/index",
-      "schema": "./schematic/schema.json"
+      "description": "Add <%= name %>",
+      "factory": "./<%= dasherize(name) %>/index",
+      "schema": "./<%= dasherize(name) %>/schema.json"
     },
-    "schematic-name": {
-      "description": "Add schematic",
-      "factory": "./schematic/index",
-      "schema": "./schematic/schema.json"
+    "<%= name %>": {
+      "description": "Add <%= name %>",
+      "factory": "./<%= dasherize(name) %>/index",
+      "schema": "./<%= dasherize(name) %>/schema.json"
     }
   }
 }

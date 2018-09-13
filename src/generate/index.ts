@@ -2,22 +2,34 @@ import {
   Rule,
   SchematicContext,
   Tree,
-  chain
+  move,
+  mergeWith,
+  apply,
+  url,
+  branchAndMerge,
+  template
 } from '@angular-devkit/schematics';
+import { strings } from '@angular-devkit/core';
 
-interface ConfigOptions { }
-
-// You don't have to export the function as default
-// and you can have more than one rule factory per file.
-export default function(options: ConfigOptions): Rule {
-  return (host: Tree, context: SchematicContext) => {
-    return chain([logger(options)])(host, context);
-  };
+interface ConfigOptions {
+  path: string;
+  dot: string;
+  name: string;
 }
 
-function logger(options: ConfigOptions): Rule {
-  return (host: Tree): Tree => {
-    console.log('schematics')
-    return host;
-  }
+export default function(options: ConfigOptions): Rule {
+  return (host: Tree, context: SchematicContext) => {
+    options.dot = '.';
+    options.name = 'myScheme';
+
+    const templateSource = apply(url('./__files__'), [
+      template({
+        ...strings,
+        ...options
+      }),
+      move(options.path || './testDir')
+    ]);
+
+    return branchAndMerge(mergeWith(templateSource));
+  };
 }
