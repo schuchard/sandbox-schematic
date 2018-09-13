@@ -4,16 +4,21 @@
   "title": "Schematic Generator Options Schema",
   "type": "object",
   "properties": {
-    "path": {
-      "type": "string",
-      "description": "Path to write the schematic to",
-      "default": "."
-    },
     "name": {
       "type": "string",
-      "description": "Name of the schematic, example: ng add NAME"
+      "description": "The name of the schematic.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the class.",
+      "visible": false
     }
   },
-  "required": ["name"],
+  "required": [],
   "additionalProperties": false
 }

@@ -7,9 +7,10 @@ import {
   apply,
   url,
   branchAndMerge,
-  template
+  template,
+  SchematicsException,
 } from '@angular-devkit/schematics';
-import { strings, basename, normalize } from '@angular-devkit/core';
+import { strings, basename, normalize, dirname, join, Path } from '@angular-devkit/core';
 
 interface ConfigOptions {
   dot: string;
@@ -19,7 +20,12 @@ interface ConfigOptions {
 
 export default function(options: ConfigOptions): Rule {
   return (host: Tree, context: SchematicContext) => {
+    if (!options.name) {
+      throw new SchematicsException('Option (name) is required.');
+    }
+
     const parsedName = basename(normalize(options.name));
+    const namePath = dirname(join(normalize(options.path || './'), options.name) as Path);
 
     options.dot = '.';
     options.name = parsedName;
@@ -27,9 +33,9 @@ export default function(options: ConfigOptions): Rule {
     const templateSource = apply(url('./__files__'), [
       template({
         ...strings,
-        ...options
+        ...options,
       }),
-      move(options.path)
+      move(namePath),
     ]);
 
     return branchAndMerge(mergeWith(templateSource));
