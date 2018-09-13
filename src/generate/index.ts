@@ -12,8 +12,8 @@ import {
 } from '@angular-devkit/schematics';
 import { strings, basename, normalize, dirname, join, Path } from '@angular-devkit/core';
 
-interface ConfigOptions {
-  dot: string;
+export interface ConfigOptions {
+  dot?: string;
   path: string;
   name: string;
 }
