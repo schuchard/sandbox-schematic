@@ -9,14 +9,15 @@
     "clean": "rm -rf sandbox && mkdir sandbox",
     "clean:launch": "yarn clean && yarn launch",
     "clean:launch:all": "yarn build:schematic && yarn clean:launch",
-    "launch": "cd sandbox && ng g @schuchard/schematic-generator:generate",
+    "launch": "schematics .:generate",
     "test:ci": "yarn clean:launch && yarn test:sandbox && yarn clean",
     "test:sandbox": "cd sandbox && yarn lint && yarn test && yarn e2e && yarn build",
     "link:schematic": "yarn link"
   },
   "dependencies": {
     "@angular-devkit/core": "^0.7.2",
-    "@angular-devkit/schematics": "^0.7.2"
+    "@angular-devkit/schematics": "^0.7.2",
+    "@angular-devkit/schematics-cli": "^0.8.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.2",

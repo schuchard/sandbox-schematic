@@ -88,12 +88,39 @@
     rxjs "^6.0.0"
     source-map "^0.5.6"
 
+"@angular-devkit/core@0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-0.8.1.tgz#b664d9965894a471686d74f92c55128ab74b8c09"
+  dependencies:
+    ajv "~6.4.0"
+    chokidar "^2.0.3"
+    rxjs "~6.2.0"
+    source-map "^0.5.6"
+
+"@angular-devkit/schematics-cli@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics-cli/-/schematics-cli-0.8.1.tgz#9c4a26d2db0a64d27a5c1f0b5b3ae16e9ec96ea2"
+  dependencies:
+    "@angular-devkit/core" "0.8.1"
+    "@angular-devkit/schematics" "0.8.1"
+    "@schematics/schematics" "0.8.1"
+    minimist "^1.2.0"
+    rxjs "~6.2.0"
+    symbol-observable "^1.2.0"
+
 "@angular-devkit/schematics@0.7.2", "@angular-devkit/schematics@^0.7.2":
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-0.7.2.tgz#809d62a264265cf345228aabead42695aa96dc64"
   dependencies:
     "@angular-devkit/core" "0.7.2"
     rxjs "^6.0.0"
+
+"@angular-devkit/schematics@0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-0.8.1.tgz#114c53cdbb0b5da7e10da3505d12f351114d24b7"
+  dependencies:
+    "@angular-devkit/core" "0.8.1"
+    rxjs "~6.2.0"
 
 "@angular/cli@~6.1.2":
   version "6.1.2"
@@ -139,6 +166,13 @@
     "@angular-devkit/core" "0.7.2"
     "@angular-devkit/schematics" "0.7.2"
     typescript ">=2.6.2 <2.8"
+
+"@schematics/schematics@0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@schematics/schematics/-/schematics-0.8.1.tgz#4f9e554dbfb55904144efe6fec19b6cfac51ab8b"
+  dependencies:
+    "@angular-devkit/core" "0.8.1"
+    "@angular-devkit/schematics" "0.8.1"
 
 "@schematics/update@0.7.2":
   version "0.7.2"
@@ -4392,7 +4426,7 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
-rxjs@^6.0.0:
+rxjs@^6.0.0, rxjs@~6.2.0:
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.2.2.tgz#eb75fa3c186ff5289907d06483a77884586e1cf9"
   dependencies:
