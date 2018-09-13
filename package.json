@@ -2,6 +2,7 @@
   "name": "@schuchard/schematic-generator",
   "version": "1.0.0",
   "main": "src/schematics/index.js",
+  "bin": "src/schematics/index.js",
   "schematics": "./src/collection.json",
   "scripts": {
     "build:schematic": "tsc -p tsconfig.json",
