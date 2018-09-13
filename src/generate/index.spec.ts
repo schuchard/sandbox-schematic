@@ -15,7 +15,7 @@ describe('Generate Schematic', () => {
     path,
   };
 
-  describe('File structure', () => {
+  describe('file structure', () => {
     const tree = schematicRunner.runSchematic('generate', defaultOptions);
     [
       `/${path}/src/collection.json`,
@@ -30,6 +30,10 @@ describe('Generate Schematic', () => {
       });
     });
   });
+
+  describe('name option', () => {});
+
+  describe('path option', () => {});
 
   function pathShouldExist(path: string, tree: UnitTestTree) {
     return expect(tree.files.indexOf(path)).toBeGreaterThanOrEqual(
