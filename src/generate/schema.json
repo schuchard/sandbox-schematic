@@ -6,17 +6,19 @@
   "properties": {
     "name": {
       "type": "string",
-      "description": "The name of the schematic.",
+      "description": "The name of the schematic",
+      "x-prompt": "Enter the schematic collection name",
+      "minLength": 1,
       "$default": {
         "$source": "argv",
         "index": 0
       }
     },
-    "path": {
+    "author": {
       "type": "string",
-      "format": "path",
-      "description": "The path to create the class.",
-      "visible": false
+      "description": "The author of the schematic",
+      "x-prompt": "Enter your name as the author",
+      "minLength": 1
     }
   },
   "required": [],

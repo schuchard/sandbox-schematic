@@ -4,12 +4,13 @@
   "main": "src/schematics/index.js",
   "bin": "src/schematics/index.js",
   "schematics": "./src/collection.json",
+  "license": "MIT",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "build:clean:launch": "yarn build && yarn clean:launch",
     "clean": "rm -rf sandbox && mkdir sandbox",
     "clean:launch": "yarn clean && yarn launch",
-    "launch": "cd sandbox && schematics --dry-run=false @schuchard/schematic-generator:build test-name",
+    "launch": "cd sandbox && schematics --dry-run=false @schuchard/schematic-generator:build test-name --author=kevin",
     "test": "yarn build:clean:launch && yarn test:sandbox && yarn clean",
     "test:sandbox": "cd sandbox && yarn lint && yarn test && yarn e2e && yarn build",
     "link:schematic": "yarn link && cd sandbox && yarn link @schuchard/schematic-generator"

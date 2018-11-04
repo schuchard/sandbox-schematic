@@ -33,7 +33,7 @@ export default function(options: ConfigOptions): Rule {
 
 export function createSchematicFiles(options: ConfigOptions): Rule {
   return (host: Tree, context: SchematicContext) => {
-    return externalSchematic('@schematics/schematics', 'blank', { options });
+    return externalSchematic('@schematics/schematics', 'blank', options);
   };
 }
 
