@@ -7,7 +7,11 @@ import {
   JsonAstObject,
   parseJsonAst,
 } from '@angular-devkit/core';
-import { findPropertyInAstObject, insertPropertyInAstObjectInOrder, appendPropertyInAstObject } from '@schematics/angular/utility/json-utils';
+import {
+  findPropertyInAstObject,
+  insertPropertyInAstObjectInOrder,
+  appendPropertyInAstObject,
+} from '@schematics/angular/utility/json-utils';
 
 export interface NpmRegistryPackage {
   name: string;
@@ -15,7 +19,7 @@ export interface NpmRegistryPackage {
 }
 
 export enum Config {
-  PackageJsonPath = 'package.json',
+  PackageJsonPath = '/test-name/package.json',
   JsonIndentLevel = 4,
 }
 export function getLatestNodeVersion(packageName: string): Promise<NpmRegistryPackage> {
@@ -28,7 +32,7 @@ export function getLatestNodeVersion(packageName: string): Promise<NpmRegistryPa
       res.on('end', () => {
         try {
           const response = JSON.parse(rawData);
-          const version = response && response['dist-tags'] || {};
+          const version = (response && response['dist-tags']) || {};
 
           resolve(buildPackage(packageName, version.latest));
         } catch (e) {
@@ -61,7 +65,7 @@ export function addPropertyToPackageJson(
 ) {
   const packageJsonAst = readPackageJson(tree);
   const pkgNode = findPropertyInAstObject(packageJsonAst, propertyName);
-  const recorder = tree.beginUpdate('package.json');
+  const recorder = tree.beginUpdate(Config.PackageJsonPath);
 
   if (!pkgNode) {
     // outer node missing, add key/value

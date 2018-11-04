@@ -61,7 +61,9 @@ export function setupSchematicScripts(options: ConfigOptions): Rule {
     'setup:once': 'yarn && yarn link:schematic && yarn',
   };
   return (host: Tree, context: SchematicContext) => {
-    addPropertyToPackageJson(host, context, 'scripts', newScripts);
+    Object.entries(newScripts).forEach(([key, val]) => {
+      addPropertyToPackageJson(host, context, 'scripts', {[key]: val});
+    })
     return host;
   };
 }
