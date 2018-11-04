@@ -5,16 +5,14 @@
   "bin": "src/schematics/index.js",
   "schematics": "./src/collection.json",
   "scripts": {
-    "build:schematic": "tsc -p tsconfig.json",
-    "build:schematic:watch": "tsc -p tsconfig.json -watch",
+    "build": "tsc -p tsconfig.json",
+    "build:clean:launch": "yarn build && yarn clean:launch",
     "clean": "rm -rf sandbox && mkdir sandbox",
     "clean:launch": "yarn clean && yarn launch",
-    "clean:launch:all": "yarn build:schematic && yarn clean:launch",
     "launch": "schematics --dry-run=false .:generate ",
-    "test": "npm run build:schematic && jasmine src/**/*.spec.js",
-    "test:ci": "yarn clean:launch && yarn test:sandbox && yarn clean",
+    "test": "yarn build:clean:launch && yarn test:sandbox && yarn clean",
     "test:sandbox": "cd sandbox && yarn lint && yarn test && yarn e2e && yarn build",
-    "link:schematic": "yarn link"
+    "link:schematic": "yarn link && cd sandbox && yarn link @user/schematic-collection"
   },
   "dependencies": {
     "@angular-devkit/core": "^7.0.4",
