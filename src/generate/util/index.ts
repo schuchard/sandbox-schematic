@@ -61,11 +61,12 @@ export function addPropertyToPackageJson(
   tree: Tree,
   context: SchematicContext,
   propertyName: string,
-  propertyValue: { [key: string]: any }
+  propertyValue: { [key: string]: any },
+  schematicName: string
 ) {
   const packageJsonAst = readPackageJson(tree);
   const pkgNode = findPropertyInAstObject(packageJsonAst, propertyName);
-  const recorder = tree.beginUpdate(Config.PackageJsonPath);
+  const recorder = tree.beginUpdate(packageJsonPath(schematicName));
 
   if (!pkgNode) {
     // outer node missing, add key/value
@@ -101,8 +102,8 @@ export function addPropertyToPackageJson(
   tree.commitUpdate(recorder);
 }
 
-export function readPackageJson(tree: Tree): JsonAstObject {
-  const buffer = tree.read(Config.PackageJsonPath);
+export function readPackageJson(tree: Tree, projectPath?: string): JsonAstObject {
+  const buffer = tree.read(packageJsonPath(projectPath));
   if (buffer === null) {
     throw new SchematicsException('Could not read package.json.');
   }
@@ -114,4 +115,8 @@ export function readPackageJson(tree: Tree): JsonAstObject {
   }
 
   return packageJson;
+}
+
+function packageJsonPath(path?: string) {
+  return  path ? `${path}/package.json` : Config.PackageJsonPath ;
 }
