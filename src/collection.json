@@ -6,7 +6,7 @@
         "factory": "./generate/index",
         "schema": "./generate/schema.json"
       },
-      "generate": {
+      "build": {
         "description": "Add schematic",
         "factory": "./generate/index",
         "schema": "./generate/schema.json"
