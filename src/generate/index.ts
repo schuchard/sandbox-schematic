@@ -62,8 +62,8 @@ export function setupSchematicScripts(options: ConfigOptions): Rule {
   };
   return (host: Tree, context: SchematicContext) => {
     Object.entries(newScripts).forEach(([key, val]) => {
-      addPropertyToPackageJson(host, context, 'scripts', {[key]: val});
-    })
+      addPropertyToPackageJson(host, context, 'scripts', { [key]: val });
+    });
     return host;
   };
 }
