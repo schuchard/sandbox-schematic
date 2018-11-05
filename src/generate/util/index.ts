@@ -19,7 +19,7 @@ export interface NpmRegistryPackage {
 }
 
 export enum Config {
-  PackageJsonPath = '/test-name/package.json',
+  PackageJsonPath = 'package.json',
   JsonIndentLevel = 4,
 }
 export function getLatestNodeVersion(packageName: string): Promise<NpmRegistryPackage> {

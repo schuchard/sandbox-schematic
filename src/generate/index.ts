@@ -22,10 +22,20 @@ export default function(options: ConfigOptions): Rule {
     }
 
     return chain([
+      prepSchematic(options),
       createSchematicFiles(options),
       createSandbox(options),
       setupSchematicScripts(options),
     ])(host, context);
+  };
+}
+
+export function prepSchematic(options: ConfigOptions): Rule {
+  // simulate an existing schematic so that @schematics/schematics doesn't create a new directory
+  return (host: Tree, context: SchematicContext) => {
+    host.create('./package.json', `{"schematics": "./src/collection.json", "scripts": {}}`)
+    host.create('./src/collection.json', `{"schematics": {} }`)
+    return;
   };
 }
 
@@ -60,7 +70,7 @@ export function setupSchematicScripts(options: ConfigOptions): Rule {
   };
   return (host: Tree, context: SchematicContext) => {
     Object.entries(newScripts).forEach(([key, val]) => {
-      addPropertyToPackageJson(host, context, 'scripts', { [key]: val }, options.name);
+      addPropertyToPackageJson(host, context, 'scripts', { [key]: val }, '');
     });
     return host;
   };
