@@ -7,8 +7,6 @@ import {
   chain,
 } from '@angular-devkit/schematics/';
 
-import {} from '@schematics/angular/utility/dependencies';
-
 import { dasherize } from '@angular-devkit/core/src/utils/strings';
 import { addPropertyToPackageJson } from './util';
 
