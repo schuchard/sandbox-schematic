@@ -33,7 +33,7 @@ export default function(options: ConfigOptions): Rule {
 export function prepSchematic(options: ConfigOptions): Rule {
   // simulate an existing schematic so that @schematics/schematics doesn't create a new directory
   return (host: Tree, context: SchematicContext) => {
-    host.create('./package.json', `{"schematics": "./src/collection.json", "scripts": {}}`)
+    host.create('./package.json', `{"schematics": "./src/collection.json",\n "scripts": {}\n}`)
     host.create('./src/collection.json', `{"schematics": {} }`)
     return;
   };
