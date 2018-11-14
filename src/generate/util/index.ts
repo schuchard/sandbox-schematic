@@ -62,11 +62,11 @@ export function addPropertyToPackageJson(
   context: SchematicContext,
   propertyName: string,
   propertyValue: { [key: string]: any },
-  schematicName: string
+  dir: string
 ) {
-  const packageJsonAst = readPackageJson(tree);
+  const packageJsonAst = readPackageJson(tree, dir);
   const pkgNode = findPropertyInAstObject(packageJsonAst, propertyName);
-  const recorder = tree.beginUpdate(packageJsonPath(schematicName));
+  const recorder = tree.beginUpdate(packageJsonPath(dir));
 
   if (!pkgNode) {
     // outer node missing, add key/value

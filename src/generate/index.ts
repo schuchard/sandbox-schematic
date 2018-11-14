@@ -22,20 +22,10 @@ export default function(options: ConfigOptions): Rule {
     }
 
     return chain([
-      prepSchematic(options),
       createSchematicFiles(options),
       createSandbox(options),
       setupSchematicScripts(options),
     ])(host, context);
-  };
-}
-
-export function prepSchematic(options: ConfigOptions): Rule {
-  // simulate an existing schematic so that @schematics/schematics doesn't create a new directory
-  return (host: Tree, context: SchematicContext) => {
-    host.create('./package.json', `{"schematics": "./src/collection.json",\n "scripts": {}\n}`)
-    host.create('./src/collection.json', `{"schematics": {} }`)
-    return;
   };
 }
 
@@ -48,6 +38,7 @@ export function createSchematicFiles(options: ConfigOptions): Rule {
 export function createSandbox(options: ConfigOptions): Rule {
   return (host: Tree, context: SchematicContext) => {
     return externalSchematic('@schematics/angular', 'ng-new', {
+      directory: `${options.name}/sandbox`,
       name: 'sandbox',
       style: 'css',
       version: '7',
@@ -60,7 +51,7 @@ export function setupSchematicScripts(options: ConfigOptions): Rule {
     build: 'tsc -p tsconfig.json',
     clean: 'git checkout HEAD -- sandbox && git clean -f -d sandbox',
     'clean:launch': 'yarn clean && yarn launch',
-    launch: `cd sandbox && ng g ${dasherize(options.name)}:schematic-name`,
+    launch: `cd sandbox && ng g ${dasherize(options.name)}:${dasherize(options.name)}`,
     'build:clean:launch': 'yarn build && yarn clean:launch',
     'test:sandbox': 'cd sandbox && yarn lint && yarn test && yarn e2e && yarn build',
     'link:schematic': `yarn link && cd sandbox && yarn link ${dasherize(options.name)}`,
@@ -70,7 +61,7 @@ export function setupSchematicScripts(options: ConfigOptions): Rule {
   };
   return (host: Tree, context: SchematicContext) => {
     Object.entries(newScripts).forEach(([key, val]) => {
-      addPropertyToPackageJson(host, context, 'scripts', { [key]: val }, '');
+      addPropertyToPackageJson(host, context, `scripts`, { [key]: val }, options.name);
     });
     return host;
   };
