@@ -25,6 +25,7 @@ export default function(options: ConfigOptions): Rule {
       createSchematicFiles(options),
       createSandbox(options),
       setupSchematicScripts(options),
+      updateGitIgnore(options),
     ])(host, context);
   };
 }
@@ -67,15 +68,41 @@ export function setupSchematicScripts(options: ConfigOptions): Rule {
   };
 }
 
+export function updateGitIgnore(options: ConfigOptions): Rule {
+  return (tree: Tree, context: SchematicContext) => {
+    const gitIgnorePath = `${options.name}/.npmignore`;
+    const ignoreRules = [
+      '*.js.map',
+      '!src/**/__files__/**/*.js',
+      '!src/**/files/**/*.ts',
+      '*.vscode',
+      'sandbox',
+    ];
+
+    if (tree.exists(gitIgnorePath)) {
+      const buffer = tree.read(gitIgnorePath);
+
+      if (buffer === null) {
+        // unable to read file
+        return tree;
+      }
+
+      const gitIgnoreBuffer = buffer.toString();
+
+      const modifiedEditorConfig = gitIgnoreBuffer
+        .split('\n')
+        .concat(ignoreRules)
+        .join('\n');
+
+      tree.overwrite(gitIgnorePath, modifiedEditorConfig);
+    }
+    return tree;
+  };
+}
+
 // add ng-add
 // "ng-add": {
 //   "description": "Add <%= name %>",
 //   "factory": "./<%= dasherize(name) %>/index",
 //   "schema": "./<%= dasherize(name) %>/schema.json"
 // },
-
-// update gitignore to save files dir
-// !src/__files__/**/*.js
-// !src/files/**/*.js
-
-// add files
