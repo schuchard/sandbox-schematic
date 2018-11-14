@@ -4,4 +4,4 @@ Schematic that generates the files necessary to build and test a Schematic again
 
 ## Test locally
 
-    yarn build:clean:launch
+    yarn test
