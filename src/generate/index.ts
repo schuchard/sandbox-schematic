@@ -66,3 +66,16 @@ export function setupSchematicScripts(options: ConfigOptions): Rule {
     return host;
   };
 }
+
+// add ng-add
+// "ng-add": {
+//   "description": "Add <%= name %>",
+//   "factory": "./<%= dasherize(name) %>/index",
+//   "schema": "./<%= dasherize(name) %>/schema.json"
+// },
+
+// update gitignore to save files dir
+// !src/__files__/**/*.js
+// !src/files/**/*.js
+
+// add files
