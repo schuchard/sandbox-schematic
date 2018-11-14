@@ -64,7 +64,7 @@ export function addPropertyToPackageJson(
   propertyValue: { [key: string]: any },
   dir: string
 ) {
-  const packageJsonAst = readPackageJson(tree, dir);
+  const packageJsonAst = readJsonFile(tree, dir);
   const pkgNode = findPropertyInAstObject(packageJsonAst, propertyName);
   const recorder = tree.beginUpdate(packageJsonPath(dir));
 
@@ -102,7 +102,7 @@ export function addPropertyToPackageJson(
   tree.commitUpdate(recorder);
 }
 
-export function readPackageJson(tree: Tree, projectPath?: string): JsonAstObject {
+export function readJsonFile(tree: Tree, projectPath?: string): JsonAstObject {
   const buffer = tree.read(packageJsonPath(projectPath));
   if (buffer === null) {
     throw new SchematicsException('Could not read package.json.');
