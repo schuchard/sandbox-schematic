@@ -7,8 +7,8 @@ import {
   chain,
 } from '@angular-devkit/schematics/';
 
-import { dasherize } from '@angular-devkit/core/src/utils/strings';
-import { addPropertyToPackageJson } from './util';
+import { dasherize, classify, camelize } from '@angular-devkit/core/src/utils/strings';
+import { addPropertyToPackageJson, readJsonFile } from './util';
 
 export interface ConfigOptions {
   name: string;
@@ -26,6 +26,7 @@ export default function(options: ConfigOptions): Rule {
       createSandbox(options),
       setupSchematicScripts(options),
       updateGitIgnore(options),
+      updateCollectionJson(options),
     ])(host, context);
   };
 }
@@ -69,7 +70,7 @@ export function setupSchematicScripts(options: ConfigOptions): Rule {
 }
 
 export function updateGitIgnore(options: ConfigOptions): Rule {
-  return (tree: Tree, context: SchematicContext) => {
+  return (host: Tree, context: SchematicContext) => {
     const gitIgnorePath = `${options.name}/.npmignore`;
     const ignoreRules = [
       '*.js.map',
@@ -79,12 +80,12 @@ export function updateGitIgnore(options: ConfigOptions): Rule {
       'sandbox',
     ];
 
-    if (tree.exists(gitIgnorePath)) {
-      const buffer = tree.read(gitIgnorePath);
+    if (host.exists(gitIgnorePath)) {
+      const buffer = host.read(gitIgnorePath);
 
       if (buffer === null) {
         // unable to read file
-        return tree;
+        return host;
       }
 
       const gitIgnoreBuffer = buffer.toString();
@@ -94,15 +95,25 @@ export function updateGitIgnore(options: ConfigOptions): Rule {
         .concat(ignoreRules)
         .join('\n');
 
-      tree.overwrite(gitIgnorePath, modifiedEditorConfig);
+      host.overwrite(gitIgnorePath, modifiedEditorConfig);
     }
-    return tree;
+    return host;
   };
 }
 
-// add ng-add
-// "ng-add": {
-//   "description": "Add <%= name %>",
-//   "factory": "./<%= dasherize(name) %>/index",
-//   "schema": "./<%= dasherize(name) %>/schema.json"
-// },
+export function updateCollectionJson(options: ConfigOptions): Rule {
+  return (host: Tree, context: SchematicContext) => {
+    let collection = readJsonFile(host, `${options.name}/src/collection.json`).value as any;
+
+    if (!collection) {
+      return host;
+    }
+
+    collection.schematics[`ng-add`] = {
+      description: `Add ${classify(options.name)} to an application.`,
+      factory: `./${dasherize(options.name)}/index#${camelize(options.name)}`,
+    };
+
+    host.overwrite(`${options.name}/src/collection.json`, JSON.stringify(collection, null, 2));
+  };
+}

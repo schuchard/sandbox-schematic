@@ -64,9 +64,10 @@ export function addPropertyToPackageJson(
   propertyValue: { [key: string]: any },
   dir: string
 ) {
-  const packageJsonAst = readJsonFile(tree, dir);
+  const _packageJsonPath = `${dir}/package.json`;
+  const packageJsonAst = readJsonFile(tree, _packageJsonPath);
   const pkgNode = findPropertyInAstObject(packageJsonAst, propertyName);
-  const recorder = tree.beginUpdate(packageJsonPath(dir));
+  const recorder = tree.beginUpdate(packageJsonPath(_packageJsonPath));
 
   if (!pkgNode) {
     // outer node missing, add key/value
@@ -102,21 +103,21 @@ export function addPropertyToPackageJson(
   tree.commitUpdate(recorder);
 }
 
-export function readJsonFile(tree: Tree, projectPath?: string): JsonAstObject {
-  const buffer = tree.read(packageJsonPath(projectPath));
+export function readJsonFile(tree: Tree, path?: string): JsonAstObject {
+  const buffer = tree.read(packageJsonPath(path));
   if (buffer === null) {
-    throw new SchematicsException('Could not read package.json.');
+    throw new SchematicsException(`Could not read json at ${path}`);
   }
   const content = buffer.toString();
 
   const packageJson = parseJsonAst(content, JsonParseMode.Strict);
   if (packageJson.kind != 'object') {
-    throw new SchematicsException('Invalid package.json. Was expecting an object');
+    throw new SchematicsException('Invalid json. Was expecting an object');
   }
 
   return packageJson;
 }
 
 function packageJsonPath(path?: string) {
-  return  path ? `${path}/package.json` : Config.PackageJsonPath ;
+  return  path ? path : Config.PackageJsonPath ;
 }
