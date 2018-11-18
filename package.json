@@ -2,8 +2,8 @@
   "name": "@schuchard/schematic-sandbox",
   "version": "0.1.0",
   "description": "Schematic that generates a blank schematic with test sandbox and scripts",
-  "main": "src/schematics/index.js",
-  "bin": "src/schematics/index.js",
+  "main": "src/generate/index.js",
+  "bin": "src/generate/index.js",
   "schematics": "./src/collection.json",
   "license": "MIT",
   "scripts": {
