@@ -1,5 +1,5 @@
 {
-  "name": "@schuchard/schematic-generator",
+  "name": "@schuchard/schematic-sandbox",
   "version": "0.0.0",
   "main": "src/schematics/index.js",
   "bin": "src/schematics/index.js",
@@ -10,10 +10,10 @@
     "build:clean:launch": "yarn build && yarn clean:launch",
     "clean": "rm -rf sandbox && mkdir sandbox",
     "clean:launch": "yarn clean && yarn launch",
-    "launch": "cd sandbox && schematics @schuchard/schematic-generator:build mySchematic --author=kevin",
+    "launch": "cd sandbox && schematics @schuchard/schematic-sandbox:build mySchematic --author=kevin",
     "test": "yarn build:clean:launch && yarn test:sandbox && yarn clean",
     "test:sandbox": "cd sandbox && cd mySchematic && cd sandbox && yarn lint && yarn test && yarn e2e && yarn build",
-    "link:schematic": "yarn link && cd sandbox && yarn link @schuchard/schematic-generator",
+    "link:schematic": "yarn link && cd sandbox && yarn link @schuchard/schematic-sandbox",
     "prettier": "prettier --parser typescript --write '**/*.ts'"
   },
   "dependencies": {

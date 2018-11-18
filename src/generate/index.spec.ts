@@ -4,7 +4,7 @@
 
 // describe('Generate Schematic', () => {
 //   const schematicRunner = new SchematicTestRunner(
-//     '@schuchard/schematic-generator',
+//     '@schuchard/schematic-sandbox',
 //     require.resolve('../collection.json')
 //   );
 
