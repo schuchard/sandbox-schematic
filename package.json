@@ -1,6 +1,6 @@
 {
   "name": "@schuchard/schematic-sandbox",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Schematic that generates a blank schematic with test sandbox and scripts",
   "main": "src/generate/index.js",
   "bin": "src/generate/index.js",
