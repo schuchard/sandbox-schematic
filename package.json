@@ -12,9 +12,10 @@
     "clean:launch": "yarn clean && yarn launch",
     "launch": "cd sandbox && schematics @schuchard/schematic-sandbox:build mySchematic --author=kevin",
     "test": "yarn build:clean:launch && yarn test:sandbox && yarn clean",
-    "test:sandbox": "cd sandbox && cd mySchematic && cd sandbox && yarn lint && yarn test && yarn e2e && yarn build",
+    "test:sandbox": "cd sandbox && cd mySchematic && yarn build && cd sandbox && yarn lint && yarn test --watch=false",
     "link:schematic": "yarn link && cd sandbox && yarn link @schuchard/schematic-sandbox",
-    "prettier": "prettier --parser typescript --write '**/*.ts'"
+    "prettier": "prettier --parser typescript --write '**/*.ts'",
+    "release": "yarn build && yarn np"
   },
   "dependencies": {
     "@angular-devkit/core": "^7.0.5",
@@ -35,6 +36,7 @@
     "jasmine": "^3.3.0",
     "jasmine-spec-reporter": "^4.2.1",
     "lint-staged": "8.0.4",
+    "np": "^3.0.4",
     "prettier": "1.15.2",
     "ts-node": "^7.0.1",
     "tslint": "~5.11.0",
