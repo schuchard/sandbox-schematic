@@ -1,6 +1,6 @@
 {
   "name": "@schuchard/schematic-generator",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "src/schematics/index.js",
   "bin": "src/schematics/index.js",
   "schematics": "./src/collection.json",
@@ -10,9 +10,9 @@
     "build:clean:launch": "yarn build && yarn clean:launch",
     "clean": "rm -rf sandbox && mkdir sandbox",
     "clean:launch": "yarn clean && yarn launch",
-    "launch": "cd sandbox && schematics --dry-run=false @schuchard/schematic-generator:build mySchematic --author=kevin",
+    "launch": "cd sandbox && schematics @schuchard/schematic-generator:build mySchematic --author=kevin",
     "test": "yarn build:clean:launch && yarn test:sandbox && yarn clean",
-    "test:sandbox": "cd sandbox && cd mySchematic && yarn lint && yarn test && yarn e2e && yarn build",
+    "test:sandbox": "cd sandbox && cd mySchematic && cd sandbox && yarn lint && yarn test && yarn e2e && yarn build",
     "link:schematic": "yarn link && cd sandbox && yarn link @schuchard/schematic-generator",
     "prettier": "prettier --parser typescript --write '**/*.ts'"
   },
@@ -42,7 +42,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {

@@ -1,3 +1,4 @@
 package.json
 sandbox/**/*
 src/**/__files__/**/*
+yarn.lock
