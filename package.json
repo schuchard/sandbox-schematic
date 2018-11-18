@@ -1,6 +1,7 @@
 {
   "name": "@schuchard/schematic-sandbox",
   "version": "0.0.0",
+  "description": "Schematic that generates a blank schematic with test sandbox and scripts",
   "main": "src/schematics/index.js",
   "bin": "src/schematics/index.js",
   "schematics": "./src/collection.json",
@@ -41,6 +42,13 @@
     "ts-node": "^7.0.1",
     "tslint": "~5.11.0",
     "typescript": "~3.1.6"
+  },
+  "engines": {
+    "node": ">=8.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schuchard/schematics-sandbox.git"
   },
   "husky": {
     "hooks": {
