@@ -46,6 +46,12 @@
     }
   },
   "lint-staged": {
-    "*.ts": ["prettier --parser typescript --write", "git add"]
+    "*.ts": [
+      "prettier --parser typescript --write",
+      "git add"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
