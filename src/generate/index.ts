@@ -52,14 +52,14 @@ export function setupSchematicScripts(options: ConfigOptions): Rule {
   const newScripts = {
     build: 'tsc -p tsconfig.json',
     clean: 'git checkout HEAD -- sandbox && git clean -f -d sandbox',
-    'clean:launch': 'yarn clean && yarn launch',
     launch: `cd sandbox && ng g ${dasherize(options.name)}:${dasherize(options.name)}`,
+    'clean:launch': 'yarn clean && yarn launch',
     'build:clean:launch': 'yarn build && yarn clean:launch',
+    test: 'yarn build:clean:launch && yarn test:sandbox && yarn clean',
     'test:sandbox': 'cd sandbox && yarn lint && yarn test && yarn e2e && yarn build',
     'link:schematic': `yarn link && cd sandbox && yarn link ${dasherize(options.name)}`,
-    test: 'yarn build:clean:launch && yarn test:sandbox && yarn clean',
-    'test:unit': 'npm run build && jasmine src/**/*_spec.js',
-    'setup:once': 'yarn && yarn link:schematic && yarn',
+    'test:unit': 'yarn build && jasmine src/**/*_spec.js',
+    publish: 'yarn test && PUBLISH_CMD',
   };
   return (host: Tree, context: SchematicContext) => {
     Object.entries(newScripts).forEach(([key, val]) => {
