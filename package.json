@@ -21,7 +21,8 @@
   "dependencies": {
     "@angular-devkit/core": "^7.0.5",
     "@angular-devkit/schematics": "^7.0.5",
-    "@angular-devkit/schematics-cli": "^0.10.5"
+    "@angular-devkit/schematics-cli": "^0.10.5",
+    "@schematics/angular": "^7.0.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.10.5",
@@ -29,7 +30,6 @@
     "@angular/cli": "~7.0.5",
     "@angular/compiler-cli": "^7.0.3",
     "@angular/language-service": "^7.0.3",
-    "@schematics/angular": "^7.0.5",
     "@types/jasmine": "^2.8.11",
     "@types/node": "^10.12.7",
     "codelyzer": "~4.5.0",
