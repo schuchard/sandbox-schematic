@@ -50,6 +50,7 @@ export function createSandbox(options: ConfigOptions): Rule {
       style: 'css',
       version: '7',
       skipInstall: options.skipInstall,
+      skipGit: true,
     });
   };
 }
@@ -130,7 +131,7 @@ export function handleGit(options: ConfigOptions): Rule {
       const commit =
         typeof options.commit == 'object' ? options.commit : !!options.commit ? {} : false;
 
-      context.addTask(new RepositoryInitializerTask('./', commit));
+      context.addTask(new RepositoryInitializerTask(`./${options.name}`, commit));
     }
   };
 }
