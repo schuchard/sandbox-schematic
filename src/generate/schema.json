@@ -19,6 +19,41 @@
       "description": "The author of the schematic",
       "x-prompt": "Enter your name as the author",
       "minLength": 1
+    },
+    "skipInstall": {
+      "type": "boolean",
+      "description": "Skip installing sandbox dependencies",
+      "x-prompt": "Skip installing sandbox dependencies",
+      "default": false
+    },
+    "skipGit": {
+      "type": "boolean",
+      "description": "When true, does not initialize a git repository.",
+      "x-prompt": "When true, does not initialize a git repository.",
+      "default": false
+    },
+    "commit": {
+      "description": "Initial git repository commit information.",
+      "oneOf": [
+        { "type": "boolean" },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": ["name", "email"]
+        }
+      ],
+      "default": true
     }
   },
   "required": [],

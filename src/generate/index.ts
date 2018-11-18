@@ -7,12 +7,16 @@ import {
   chain,
 } from '@angular-devkit/schematics/';
 
+import { RepositoryInitializerTask } from '@angular-devkit/schematics/tasks';
 import { dasherize, classify, camelize } from '@angular-devkit/core/src/utils/strings';
 import { addPropertyToPackageJson, readJsonFile } from './util';
 
 export interface ConfigOptions {
   name: string;
   author?: string;
+  skipInstall?: boolean;
+  skipGit?: boolean;
+  commit?: any;
 }
 
 export default function(options: ConfigOptions): Rule {
@@ -27,6 +31,7 @@ export default function(options: ConfigOptions): Rule {
       setupSchematicScripts(options),
       updateGitIgnore(options),
       updateCollectionJson(options),
+      handleGit(options),
     ])(host, context);
   };
 }
@@ -44,6 +49,7 @@ export function createSandbox(options: ConfigOptions): Rule {
       name: 'sandbox',
       style: 'css',
       version: '7',
+      skipInstall: options.skipInstall,
     });
   };
 }
@@ -115,5 +121,16 @@ export function updateCollectionJson(options: ConfigOptions): Rule {
     };
 
     host.overwrite(`${options.name}/src/collection.json`, JSON.stringify(collection, null, 2));
+  };
+}
+
+export function handleGit(options: ConfigOptions): Rule {
+  return (host: Tree, context: SchematicContext) => {
+    if (!options.skipGit) {
+      const commit =
+        typeof options.commit == 'object' ? options.commit : !!options.commit ? {} : false;
+
+      context.addTask(new RepositoryInitializerTask('./', commit));
+    }
   };
 }
